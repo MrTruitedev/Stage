@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"thomas.photosearch","l":"DirectoryInfo"},{"p":"thomas.photosearch","l":"PhotoManagerDB"},{"p":"thomas.photosearch","l":"PhotoSearch"},{"p":"thomas.photosearch","l":"XMLTreeReader"}];updateSearchResults();
