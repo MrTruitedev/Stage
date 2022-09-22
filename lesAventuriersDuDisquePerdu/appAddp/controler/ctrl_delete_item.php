@@ -11,7 +11,7 @@
         //*set id item
         $item -> setIditem($_GET['id']);
         //*Recuperation de l'article par son id
-        $tab = $item ->showItem($bdd);
+        $tab = $item ->showItemByID($bdd);
         //*Stockage du nom
         $name = $tab[0]['name_item'];
         //*Suppression de l'item par son id

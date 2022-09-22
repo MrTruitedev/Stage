@@ -6,13 +6,14 @@
     include './view/view_add_item.php';
     //message
     $msg = "";
-    //!Affichage des types des produits présents en db A FINIR
-    echo '<script>php.innerHTML = '.
-    $product = $bdd -> query('SELECT id_product, name_product FROM products');
-    while($affichage = $product->fetch()){
-        $selected = (isset($_POST['products']) AND $_POST['products'] == $affichage['id_product']) ? 'selected="selected"' : '';
-        echo '<option value="'.$affichage['id_product'].'"'.$selected.'>'.$affichage['name_product'].'</option></br>';
-    }.'</script>';
+    // //!Affichage des types des produits présents en db A FINIR
+    // echo '<script> let php = document.getElementById(#php);
+    //     php.innerHTML = '.
+    // $product = $bdd -> query('SELECT id_product, name_product FROM products');
+    // while($affichage = $product->fetch()){
+    //     $selected = (isset($_POST['products']) AND $_POST['products'] == $affichage['id_product']) ? 'selected="selected"' : '';
+    //     echo '<option value="'.$affichage['id_product'].'"'.$selected.'>'.$affichage['name_product'].'</option></br>';
+    // }.'</script>';
     //Test click bouton submit
     if(isset($_POST['add'])){
         //Test remplissage des champs

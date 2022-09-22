@@ -31,7 +31,7 @@
         public function setIditem(?int $id):void{
             $this -> id_item = $id;
         }
-        public function setNameitem(?int $name):void{
+        public function setNameitem(?string $name):void{
             $this -> name_item = $name;
         }
         public function setDateBought(?string $date):void{

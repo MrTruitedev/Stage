@@ -25,10 +25,10 @@
         }
 
         //Afficher un item
-        public function showItem(object $bdd):?array{
+        public function showItemById(object $bdd):?array{
+            $id = $this -> getIdItem();
             try{
-                $id = $this -> getIdItem();
-                $req = $bdd -> prepare('SELECT * FROM items WHERE
+                $req = $bdd -> prepare('SELECT name_item, date_bought, (SELECT name_product FROM products WHERE id_product= id_item) AS id_product FROM items WHERE
                 id_item = ?');
                 //Affectation des parametres
                 $req -> bindParam(1, $id, PDO::PARAM_INT);
@@ -40,6 +40,22 @@
                 die('Erreur : '.$e -> getMessage());
             }
         }
+
+        //Afficher un item par son nom
+        public function showItemByName($bdd):object{
+            try{
+            $name = $this->getNameItem();
+            $req = $bdd -> prepare('SELECT * FROM items WHERE name_item = ?');
+            //Affectation des parametres
+            $req -> bindParam(1, $name, PDO::PARAM_STR);
+            $req -> execute();
+            $data = $req -> fetchAll(PDO::FETCH_OBJ);
+            return $data;    
+        }
+        catch(Exception $e){
+            die('Erreur '.$e -> getMessage());
+        }
+    }
 
         //Afficher tous les items
         public function showAllItems(object $bdd):?array{

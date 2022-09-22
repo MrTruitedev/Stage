@@ -15,7 +15,7 @@
         //injection de l'id (obj)->setIditem
         $item -> setIdItem($_GET['id']);
         //Récuperation des valeurs (array)
-        $tab = $item -> showItem($bdd);
+        $tab = $item -> showItemById($bdd);
         $name_item = $tab[0]['name_item'];
         $date_bought = $tab[0]['date_bought'];
         $id_product = $tab[0]['id_product'];
