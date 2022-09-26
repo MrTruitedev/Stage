@@ -2,7 +2,11 @@ USE Addp;
 CREATE TABLE clients(
    id_client INT not null auto_increment,
    society VARCHAR(50),
-   address TEXT,
+   street_number INT,
+   street VARCHAR(50),
+   city VARCHAR(50),
+   zip INT,
+   country VARCHAR(50),
    mail VARCHAR(50),
    contact_name VARCHAR(50),
    tel INT,
