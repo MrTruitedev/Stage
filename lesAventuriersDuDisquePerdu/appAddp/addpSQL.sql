@@ -36,11 +36,11 @@ CREATE TABLE loan(
 );
 
 CREATE TABLE item_properties(
-   id_propertie INT not null auto_increment,
-   item_propertie VARCHAR(50),
+   id_property INT not null auto_increment,
+   item_property VARCHAR(50),
    propertie_value VARCHAR(50),
    id_item INT,
-   PRIMARY KEY(id_propertie),
+   PRIMARY KEY(id_property),
    FOREIGN KEY(id_item) REFERENCES items(id_item)
 );
 
