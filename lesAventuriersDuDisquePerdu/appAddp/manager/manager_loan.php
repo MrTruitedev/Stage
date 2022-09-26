@@ -80,10 +80,12 @@
 
         //Afficher tous les loan
         public function showAllLoan($bdd):array{
+            $state = 'out';
             try{
                 $req = $bdd->prepare('SELECT id_item, date_loan, state, date_return, note, 
                 (SELECT name_client FROM clients WHERE id_client= id_loan) AS id_client, 
-                (SELECT name_item FROM item WHERE id_item = id_loan), AS id_item FROM loan');
+                (SELECT name_item FROM item WHERE id_item = id_loan), AS id_item WHERE state = ? FROM loan');
+                $req -> bindParam(1, $state, PDO::PARAM_STR);
                 $req->execute();
                 $data = $req->fetchAll(PDO::FETCH_ASSOC);
                 return $data;
@@ -116,19 +118,7 @@
                 die('Erreur : '.$e ->getMessage());
             }
         }
-
-        //Modifier un loan par client
-        // public function updateLoanByClient($bdd):void{
-        //     $idLoan = $this->getIdLoan();
-        //     $idClient = $this->getIdClient();
-        //     $idItem = $this->getIdItem();
-        //     $note = $this->getNoteLoan();
-        //     try{
-        //         $req = $bdd -> prepare('UPDATE loan SET ')
-        //     }
-        // }
         
-
         //Modifier un loan
         public function updateLoan($bdd):void{
             $idLoan = $this->getIdLoan();

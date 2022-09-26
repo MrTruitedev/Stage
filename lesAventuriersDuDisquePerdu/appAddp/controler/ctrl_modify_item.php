@@ -49,7 +49,6 @@
                 $msg = "L\'item a été modifié";
                 echo "<script>
                     nom.value = '$newName';
-                    
                     date2.value = '$newDate';
                     idProduct2.value = '$newIdProduct';
                     setTimeOut(()=>{
@@ -63,5 +62,4 @@
         header('Location: /addp/test.php');
     }
     echo $msg;
-
 ?>

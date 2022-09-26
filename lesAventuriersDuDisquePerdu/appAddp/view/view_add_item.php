@@ -17,7 +17,7 @@
         <p><input type="date" name="date_bought"></p>
         <p>saisir le type de produit :</p>
         <div id="php">
-            <p><select name="products" onchange="this.form.submit();"></p>
+        <p><select name="products"></p>
             <option value="">Selectionnez un produit</option>
             <?php
             $product = $bdd -> query('SELECT id_product, name_product FROM products');
@@ -25,7 +25,7 @@
                 $selected = (isset($_POST['products']) AND $_POST['products'] == $affichage['id_product']) ? 'selected="selected"' : '';
                 echo '<option value="'.$affichage['id_product'].'"'.$selected.'>'.$affichage['name_product'].'</option></br>';
             }
-        ?>
+                ?>
         </div>
         <p><input type="submit" value="Ajouter" name="add"></p>
     </form>

@@ -25,6 +25,7 @@
     $item = new ManagerItem(null, null, null);
     //stocker le résultat de la méthode showAllItem
     $liste = $item->showAllItems($bdd);
+    //var_dump($item);
     //test si le tableau d'article est vide
     if(empty($liste)){
         $message = '<li>
@@ -36,12 +37,15 @@
     else{
         //parcourir le tableau (version tableau associatif)
         foreach($liste as $value){
+            //var_dump($value);
             echo '<li>
-            '.$value->id_item.', '.$value->name_item.', '.$value->date_bought.', '.$value->id_product. '
-            <a href="/addp/modifyItem?id='.$value->id_item.'"><img src="./asset/img/edit.png"class="logo"></a>
-            <a href="/addp/deleteItem?id='.$value->id_item.'"><img src="./asset/img/delete.png"class="logo"></a>
+            '.$value['name_item'].', '.$value['date_bought'].', '.$value['name_product']. '
+            <a href="/addp/modifyItem?id='.$value['id_item'].'"><img src="./asset/img/edit.png"class="logo"></a>
+            <a href="/addp/deleteItem?id='.$value['id_item'].'"><img src="./asset/img/delete.png"class="logo"></a>
             </li>';
         }
+        //var_dump($item);
+        //var_dump($value);
     }
     echo $message;
 

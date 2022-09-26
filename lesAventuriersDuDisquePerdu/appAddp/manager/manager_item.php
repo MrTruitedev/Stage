@@ -43,8 +43,8 @@
 
         //Afficher un item par son nom
         public function showItemByName($bdd):object{
-            try{
             $name = $this->getNameItem();
+            try{
             $req = $bdd -> prepare('SELECT * FROM items WHERE name_item = ?');
             //Affectation des parametres
             $req -> bindParam(1, $name, PDO::PARAM_STR);
@@ -60,9 +60,9 @@
         //Afficher tous les items
         public function showAllItems(object $bdd):?array{
             try{
-                $req = $bdd->prepare('SELECT id_item, name_item, date_bought, (SELECT name_product FROM products WHERE id_product= id_item) AS id_product FROM items');
+                $req = $bdd->prepare('SELECT items.id_item, items.name_item, items.date_bought, items.id_product, products.name_product FROM items INNER JOIN products ON items.id_product = products.id_product ORDER BY `items`.`id_item` ASC');
                 $req->execute();
-                $data = $req->fetchAll(PDO::FETCH_OBJ);
+                $data = $req->fetchAll(PDO::FETCH_ASSOC);
                 return $data;
             }
             catch(Exception $e)
@@ -92,9 +92,9 @@
             }
         }
         //Supprimer un item
-        public function deleteItem(object $bdd):void{
+        public function deleteItem(object $bdd):void{                
+            $id = $this -> getIdItem();
             try{
-                $id = $this -> getIditem();
                 $req = $bdd -> prepare('DELETE FROM items WHERE id_item = ?');
                 $req -> bindParam(1, $id, PDO::PARAM_INT);
                 $req -> execute();
