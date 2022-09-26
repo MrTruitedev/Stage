@@ -28,9 +28,12 @@
         case $path === '/addp/deleteItem' :
             include './controler/items/ctrl_delete_item.php';   
             break;
-        //route /addp/addLoan -> ./controler/loans/controler_add_loans.php
-        case $path === '/addp/addLoan' :
-            include './controler/loans/ctrl_add_loans.php';   
+        //route /addp/addClient -> ./controler/clients/controler_add_client.php
+        case $path === '/addp/addClient' :
+            include './controler/clients/ctrl_add_client.php';   
             break;
-        
+        //route /addp/AllClients -> ./controler/clients/controler_show_all_clients.php
+        case $path === '/addp/allClients':
+            include './controler/clients/ctrl_show_all_clients.php';
+            break;
     }
