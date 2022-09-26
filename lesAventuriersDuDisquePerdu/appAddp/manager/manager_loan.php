@@ -5,7 +5,7 @@
         //METHODES
         //Ajout LOAN
         public function addLoan($bdd){
-            $date = $this->getDateLoan();
+            $date = date("Y-m-d");
             $state = 'out';
             $note = $this->getNoteLoan();
             $idClient = $this->getIdClient();
