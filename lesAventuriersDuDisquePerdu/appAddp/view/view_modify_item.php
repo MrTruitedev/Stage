@@ -10,11 +10,19 @@
     <h3>Ajouter un disque</h3>
     <form action="" method="post">
         <p>Modifier le nom :</p>
-        <p><input type="text" name="name_disk" id="nom"></p>
+        <p><input type="text" name="name_item" id="nom"></p>
         <p>Modifier la date d'achat :</p>
         <p><input type="date" name="date_bought" id="date"></p>
-        <p>Modifier le produit :</p>
-        <p><input type="text" name="id_product" id="idProduct"></p>
+        <p>Modifier le produit</p>
+        <p><select name="id_product"></p>
+            <option value="">Selectionnez un produit</option>
+            <?php
+            $product = $bdd -> query('SELECT id_product, name_product FROM products');
+            while($affichage = $product->fetch()){
+                $selected = (isset($_POST['products']) AND $_POST['products'] == $affichage['id_product']) ? 'selected="selected"' : '';
+                echo '<option value="'.$affichage['id_product'].'"'.$selected.'>'.$affichage['name_product'].'</option></br>';
+            }
+                ?>
         <p><input type="submit" value="Modifier" name="modify"></p>
     </form>
     <div id="error"></div>

@@ -23,13 +23,10 @@
         echo "<script>
             let name = '$name_item';
             let date = '$date_bought';
-            let idProduct = '$id_product';
             let nom = document.querySelector('#nom');
             let date2 = document.querySelector('#date');
-            let idProduct2 = document.querySelector('#idProduct');
             nom.value = name;
             date2.value = date;
-            idProduct2.value = idProduct;
         </script>";
         //test click sur modifier
         if(isset($_POST['modify'])){
@@ -37,29 +34,35 @@
             if(isset($_POST['name_item'])  AND isset($_POST['date_bought']) AND isset($_POST['id_product']) 
             AND $_POST['name_item'] !="" AND $_POST['date_bought'] !="" AND $_POST['id_product'] !=""){
                 //Instance d'un nouvel objet item
-                $item2 = new ManagerItem($_POST['name_item'], $_POST['date_bought'], $_POST['id_product']);
+                $item2 = new ManagerItem(cleanInput($_POST['name_item']), cleanInput($_POST['date_bought']),
+                $_POST['id_product']);
                 //affectation de l'id du disque
+                
                 $item2 -> setIdItem($_GET['id']);
                 $item2 -> updateitem($bdd);
-                //récupération des nouvelles valeurs
+                //récupération des nouvelles valeurs    
+                ;
                 $newName = cleanInput($_POST['name_item']);
                 $newDate = cleanInput($_POST['date_bought']);
                 $newIdProduct = cleanInput($_POST['id_product']);
                 //msg de modification
-                $msg = "L\'item a été modifié";
+                $msg = "L'item a été modifié";
                 echo "<script>
-                    nom.value = '$newName';
-                    date2.value = '$newDate';
-                    idProduct2.value = '$newIdProduct';
-                    setTimeOut(()=>{
-                        document.location.href='/addp/allItems;
-                    },1500);
+                nom.value = '$newName';
+                date2.value = '$newDate';
+                setTimeout(()=>{
+                    document.location.href='/addp/allItems'; 
+                    }, 1500);
                 </script>";
-            } 
+            }
+            else{
+                $msg = 'Champs invalides';
+            }
         }
     }
     else{
         header('Location: /addp/test.php');
     }
+var_dump($_POST);
     echo $msg;
 ?>

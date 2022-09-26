@@ -60,7 +60,9 @@
         //Afficher tous les items
         public function showAllItems(object $bdd):?array{
             try{
-                $req = $bdd->prepare('SELECT items.id_item, items.name_item, items.date_bought, items.id_product, products.name_product FROM items INNER JOIN products ON items.id_product = products.id_product ORDER BY `items`.`id_item` ASC');
+                $req = $bdd->prepare('SELECT items.id_item, items.name_item, items.date_bought, 
+                items.id_product, products.name_product FROM items INNER JOIN products 
+                ON items.id_product = products.id_product ORDER BY `items`.`id_item` ASC');
                 $req->execute();
                 $data = $req->fetchAll(PDO::FETCH_ASSOC);
                 return $data;
@@ -79,7 +81,8 @@
             $date = $this -> getDateBought();
             $idProduct = $this -> getIdProduct();
             try{
-                $req = $bdd -> prepare('UPDATE items SET name_item = ?, date_bought = ?, id_product = ? WHERE id_item = ?');
+                $req = $bdd -> prepare('UPDATE items SET name_item = ?, date_bought = ?, id_product = ? 
+                WHERE id_item = ?');
                 //Affectation des parametres               
                 $req -> bindParam(1, $name, PDO::PARAM_STR);
                 $req -> bindParam(2, $date, PDO::PARAM_STR);
