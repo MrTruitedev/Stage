@@ -10,14 +10,14 @@
         //message d'erreur
         $message = "Veuillez sélectionner un item";
     }
-    //test si un objet a été supprimé
+    // test si un objet a été supprimé
     if(isset($_GET['del']) AND $_GET['del'] !=""){
         //message de suppression
-        $message = 'Item '.$_GET['del'].'a été supprimé';
+        $message = 'Item '.$_GET['del'].' a été supprimé';
         //refresh de la page
         echo "<script>
             setTimeout(()=>{
-                document.location.href='addp/allItems';
+                document.location.href='/addp/allItems';
             }, 1500);
             </script>";
     }
@@ -28,10 +28,9 @@
     //var_dump($item);
     //test si le tableau d'article est vide
     if(empty($liste)){
-        $message = '<li>
-        <a href="/addp/addItem">Veuillez ajouter un item</a>
-        </li>
-        </ul>';
+        $message = '</ul><br/>
+        <p><a href="/addp/addItem">Veuillez ajouter un item</a></p>
+        ';
     }
     //test sinon (tableau est rempli)
     else{
