@@ -1,11 +1,11 @@
 <?php
-    include './model/model_item.php';
+    include './model/model_loan.php';
 
     class ManagerLoan extends Loan{
         //METHODES
         //Ajout LOAN
         public function addLoan($bdd){
-            $date = $this->getDateLoan();
+            $date = date("Y-m-d");
             $state = 'out';
             $note = $this->getNoteLoan();
             $idClient = $this->getIdClient();

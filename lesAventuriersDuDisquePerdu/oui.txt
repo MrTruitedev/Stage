@@ -39,3 +39,6 @@ supprimer aussi les id dans la table link =====> CHECKED
 
 Finaliser code (une seule requete select min(date))
 Javadoc documenter le projet
+
+connexion cyberlab
+ssh eddy@192.168.0.6 -p 50022

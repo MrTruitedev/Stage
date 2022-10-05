@@ -12,20 +12,45 @@
         case $path === "/addp/test" : 
             include 'test.php';
             break;
-        //route /addp/allItems -> ./controler/ctrl_show_all_items.php
+        //route /addp/allItems -> ./controler/items/ctrl_show_all_items.php
         case $path === '/addp/allItems':
-            include './controler/ctrl_show_all_items.php';
+            include './controler//items/ctrl_show_all_items.php';
             break;
-        //route /addp/addItem -> ./controler/controler_add_item.php
+        //route /addp/addItem -> ./controler/items/controler_add_item.php
         case $path === '/addp/addItem':
-            include './controler/ctrl_add_item.php';
+            include './controler/items/ctrl_add_item.php';
             break;
-        //route /addp/modifyItem -> ./controler/controler_modify_item.php
+        //route /addp/modifyItem -> ./controler/items/controler_modify_item.php
         case $path === '/addp/modifyItem' :
-            include './controler/ctrl_modify_item.php';
+            include './controler/items/ctrl_modify_item.php';
             break;
-         //route /addp/deleteItem -> ./controler/controler_delete_item.php
-         case $path === '/addp/deleteItem' :
-            include './controler/ctrl_delete_item.php';   
+         //route /addp/deleteItem -> ./controler/items/controler_delete_item.php
+        case $path === '/addp/deleteItem' :
+            include './controler/items/ctrl_delete_item.php';   
             break;
+        //route /addp/addClient -> ./controler/clients/controler_add_client.php
+        case $path === '/addp/addClient' :
+            include './controler/clients/ctrl_add_client.php';   
+            break;
+        //route /addp/AllClients -> ./controler/clients/controler_show_all_clients.php
+        case $path === '/addp/allClients':
+            include './controler/clients/ctrl_show_all_clients.php';
+            break;
+        //route /addp/modifyClient -> ./controler/clients/controler_modify_client.php
+        case $path === '/addp/modifyClient':
+            include './controler/clients/ctrl_modify_client.php';
+            break;
+        //route /addp/deleteClient -> ./controler/clients/controler_delete_client.php
+        case $path === '/addp/deleteClient':
+            include './controler/clients/ctrl_delete_client.php';
+            break;
+        //route /addp/addLoan -> ./controler/loans/controler_add_loan.php
+        case $path === '/addp/addLoan' :
+            include './controler/loans/ctrl_add_loan.php';   
+            break;
+        //route /scan -> ./controler/scan/ctrl_scan.php
+        case $path === '/addp/scan' :
+            include './controler/scan/ctrl_scan.php';
+            break;
+            
     }
