@@ -1,7 +1,7 @@
 <?php
     class Loan{
         //attributs
-        private ?int $id_loan;
+        private ?int $id_loan=null;
         private ?string $date_loan;
         private ?string $state;
         private ?string $date_return;
@@ -44,7 +44,7 @@
         
         //SETTER
         public function setIdLoan(?int $id):void{
-            $this -> id_Loan = $id;
+            $this -> id_loan = $id;
         }
         public function setDateLoan(?string $date):void{
             $this -> date_loan = $date;

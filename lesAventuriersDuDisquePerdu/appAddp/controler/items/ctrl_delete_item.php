@@ -16,9 +16,9 @@
         $name = $tab[0]['name_item'];
         //*Suppression de l'item par son id
         $item -> deleteItem($bdd);
-        header("Location: /addp/allItems?del=$name");
+        header("Location: ?allItems&del=$name");
     }
     else{
-        header("Location : /addp/allItems?noId");
+        header("Location : ?allItems&noId");
     }
 ?>

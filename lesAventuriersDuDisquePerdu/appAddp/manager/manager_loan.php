@@ -5,7 +5,7 @@
         //METHODES
         //Ajout LOAN
         public function addLoan($bdd){
-            $date = date("Y-m-d");
+            $date = date("Y-m-d H:i:s");
             $state = 'out';
             $note = $this->getNoteLoan();
             $idClient = $this->getIdClient();
@@ -28,7 +28,7 @@
         }
 
         //Afficher loan par son id
-        public function showLoanById($bdd):object{
+        public function showLoanById($bdd):array{
             $id = $this->getIdLoan();
             try{
                 
@@ -36,7 +36,7 @@
                 //Affectattion du parametre
                 $req -> bindParam(1, $id, PDO::PARAM_INT);
                 $req -> execute();
-                $data = $req -> fetchAll(PDO::FETCH_OBJ);
+                $data = $req -> fetchAll(PDO::FETCH_ASSOC);
                 return $data;
             }
             catch(Exception $e){
@@ -62,15 +62,16 @@
         }
 
         //Afficher loan par son item
-        public function showLoanByItem($bdd):object{
+        public function getLoanByItem($bdd):array{
             $idItem = $this->getIdItem();
             try{
-                
-                $req = $bdd -> prepare('SELECT * FROM loan WHERE id_item = ?');
+                $bdd->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+                $bdd->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, false);
+                $req = $bdd -> prepare('SELECT id_loan FROM loan WHERE id_item = ?');
                 //Affectation du parametre
                 $req -> bindParam(1, $idItem, PDO::PARAM_INT);
                 $req -> execute();
-                $data = $req -> fetchAll(PDO::FETCH_OBJ);
+                $data = $req -> fetchAll(PDO::FETCH_ASSOC);
                 return $data;
             }
             catch(Exception $e){
@@ -82,10 +83,23 @@
         public function showAllLoan($bdd):array{
             $state = 'out';
             try{
-                $req = $bdd->prepare('SELECT id_item, date_loan, state, date_return, note, 
-                (SELECT name_client FROM clients WHERE id_client= id_loan) AS id_client, 
-                (SELECT name_item FROM item WHERE id_item = id_loan), AS id_item WHERE state = ? FROM loan');
-                $req -> bindParam(1, $state, PDO::PARAM_STR);
+                $req = $bdd->prepare('SELECT id_loan, id_item AS idi, id_client AS idc, date_loan, state, date_return, note, (SELECT society FROM clients WHERE id_client= idc) AS id_client, (SELECT name_item FROM items WHERE id_item = idi) AS id_item FROM loan');
+                $req->execute();
+                $data = $req->fetchAll(PDO::FETCH_ASSOC);
+                return $data;
+            }
+            catch(Exception $e)
+            {
+                //affichage d'une exception en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
+        }
+
+        public function getLoanInfo($bdd):array{
+            $idLoan = $this->getIdLoan();
+            try{
+                $req = $bdd->prepare('SELECT id_loan, id_item AS idi, id_client AS idc, DATE_FORMAT(date_loan, "%Y-%m-%d") AS fdateloan, state, date_return, note, (SELECT society FROM clients WHERE id_client= idc) AS id_client, (SELECT name_item FROM items WHERE id_item = idi) AS id_item FROM loan WHERE id_loan = ?');
+                $req -> bindParam(1, $idLoan, PDO::PARAM_INT);
                 $req->execute();
                 $data = $req->fetchAll(PDO::FETCH_ASSOC);
                 return $data;
@@ -99,7 +113,7 @@
         
         //Retour de loan
         public function loanReturned($bdd):void{
-            $date = date('Y-m-d');
+            $date = date("Y-m-d H:i:s");
             $idLoan = $this->getIdLoan();
             $state = 'in';
             $dateReturn = $date;
@@ -156,6 +170,8 @@
                 die('Erreur : '.$e -> getMessage());
             }
         }
+        // //Récuperer la note
+        // public function getNote
     }
 
 ?>

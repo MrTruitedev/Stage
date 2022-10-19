@@ -1,9 +1,9 @@
 <?php
     //import
-    include './utils/connect_db.php';
-    include './utils/function.php';
-    include './manager/manager_item.php';
-    include './view/items/view_add_item.php';
+    require('./utils/connect_db.php');
+   
+    require('./manager/manager_item.php');
+    require('./view/items/view_add_item.php');
     //message
     $msg = "";
     // //!Affichage des types des produits présents en db A FINIR

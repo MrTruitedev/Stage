@@ -86,27 +86,6 @@ function fillSearch(str) {
     showResult(str);
 }
 
-function showResult(str) {
-    if (str.length == 0) {
-        document.getElementById('livesearch').innerHTML = "";
-        document.getElementById('livesearch').style.border = "0px";
-        return;
-    }
-    if (window.XMLHttpRequest) {
-        xmlhttp = new XMLHttpRequest();
-    } else {
-        xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-    }
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("livesearch").innerHTML = this.responseText;
-        }
-    }
-    xmlhttp.open('GET', 'addLoan?=' + str + '&display=1', true);
-    xmlhttp.send();
-    displayMode = 1
-}
-
 function showKeys(str) {
     if (displayMode != 0) {
         displayMode = 0;
@@ -124,8 +103,10 @@ function showKeys(str) {
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("livesearch").innerHTML = this.responseText;
+	
         }
     }
-    xmlhttp.open('GET', 'addLoan?q=' + str, true);
+
+    xmlhttp.open('GET', '../../controler/loans/ctrl_add_loan.php?q=' + str, true);
     xmlhttp.send();
 }

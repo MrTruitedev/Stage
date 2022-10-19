@@ -1,5 +1,5 @@
 <?php
-    include './model/model_item.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/model/model_item.php';
 
     class ManagerItem extends Item{
         //METHODES
@@ -78,7 +78,7 @@
         public function getStateItem($bdd){
             $idItem = $this->getIdItem();
             try{
-                $req = $bdd -> prepare('SELECT state FROM loan WHERE id_item = ?');
+                $req = $bdd -> prepare('SELECT date_loan, note FROM loan WHERE (id_item = ? && date_return IS NULL)');
                 $req -> bindParam(1, $idItem, PDO::PARAM_INT);
                 $req -> execute();
                 $data = $req->fetchAll(PDO::FETCH_ASSOC);

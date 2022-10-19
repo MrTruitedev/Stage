@@ -1,7 +1,7 @@
 <?php
     //import
     include './utils/connect_db.php';
-    include './utils/function.php';
+
     include './manager/manager_item.php';
 
     include './view/items/view_modify_item.php';
@@ -19,6 +19,7 @@
         $name_item = $tab[0]['name_item'];
         $date_bought = $tab[0]['date_bought'];
         $id_product = $tab[0]['id_product'];
+        var_dump($date_bought);
         //Script JS (injection des valeurs existante en bdd)
         echo "<script>
             let name = '$name_item';
@@ -51,7 +52,7 @@
                 nom.value = '$newName';
                 date2.value = '$newDate';
                 setTimeout(()=>{
-                    document.location.href='/addp/allItems'; 
+                    document.location.href='?allItems'; 
                     }, 1500);
                 </script>";
             }
@@ -61,8 +62,8 @@
         }
     }
     else{
-        header('Location: /addp/test.php');
+        header('Location:');
     }
-var_dump($_POST);
+
     echo $msg;
 ?>

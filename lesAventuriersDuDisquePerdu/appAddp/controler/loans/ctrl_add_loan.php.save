@@ -1,5 +1,5 @@
 <?php
-    
+
     if ( isset($_GET["q"]) ){	
        $q= ltrim($_GET["q"]); 
     } else {
@@ -14,7 +14,7 @@
 
     if ( $q=="") { //include these file for the first load 
       include './utils/connect_db.php';
-      include './manager/manager_client.php';
+      
       include './manager/manager_loan.php';
       include './view/loans/view_add_loan.php';
     }
@@ -34,7 +34,7 @@
         $sql = 'SELECT c.society, c.id_client AS idc FROM clients AS c WHERE c.society LIKE "%'.$firstkey.'%" ORDER BY c.society';
         $res = $db->query($sql);
         while($data = mysqli_fetch_assoc($res)){
-	//	$selected = (isset($_POST['idc']) AND $_POST['idc'] == $data['idc']) ? 'selected="selected"' : '';
+		$selected = (isset($_POST['clients']) AND $_POST['clients'] == $data['id_client']) ? 'selected="selected"' : '';
             $hint.= "<option value=".$data["idc"].">".$data["society"]."</option>";
         }
     }
@@ -44,38 +44,29 @@
     if($hint=="" && $q!=""){	
         $response.="<div id='notfound'>no suggestion</div>";
     }elseif (strlen($hint)>0) {
-        $response="<select name='idc' id='client_list'>";
+        $response="<select id='client_list'>";
         $response.=$hint;
         $response.="</select>";
 
     }
     echo $response;
-	
+	var_dump($_POST);
 
     if ( $q=="") {	
       $msg = "";
       //Test click bouton submit
       if(isset($_POST['add'])){
         //Test remplissage des champs
-        if(!empty($_POST['idc'])){
+        if(!empty($_POST['id_item']) AND !empty($_POST['idc'])){
             //Sécurisation des variables POST
-            $idItem = $_GET['id'];
-            $idClient = $_POST['idc'];
+            $idItem = cleanInput($_POST['id_item']);
+            $idClient = cleanInput($_POST['idc']);
             $note = cleanInput($_POST['note']);
             //Instance de l'objet loan
             $loan = new ManagerLoan(null, null, null, $note, $idClient, $idItem);
             $loan -> addLoan($bdd);
             $msg = "Loan a été ajouté en BDD";
-        }elseif (empty($_POST['idc'])) {
-            $idItem = $_GET['id'];
-            $society = cleanInput($_POST['search']);
-            $note = cleanInput($_POST['note']);
-            $societyQuery = $bdd -> prepare('INSERT INTO clients(society) VALUES ("'.$society.'")');
-            $societyQuery -> execute();
-            $idNewClient = $bdd -> lastInsertId();
-            $loan = new ManagerLoan(null, null, null, $note, $idNewClient, $idItem);
-            $loan -> addLoan($bdd);
-            $msg = "Loan ajouté en BDD, pensez a ajouter les infos clients";
+            var_dump($item);
         }
         else{
             $msg = "Données incorrectes";

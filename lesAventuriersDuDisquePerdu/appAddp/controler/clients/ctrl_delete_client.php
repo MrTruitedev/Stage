@@ -16,9 +16,9 @@
         $society = $tab[0]['society'];
         //*Suppression de l'item par son id
         $client -> deleteClient($bdd);
-        header("Location: /addp/allClients?del=$society");
+        header("Location: ?allClients&del=$society");
     }
     else{
-        header("Location : /addp/allItems?noId");
+        header("Location : ?allClients&noId");
     }
 ?>

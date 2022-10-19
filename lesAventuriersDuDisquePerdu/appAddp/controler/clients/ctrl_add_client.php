@@ -1,6 +1,6 @@
 <?php
     include './utils/connect_db.php';
-    include './utils/function.php';
+
     include './manager/manager_client.php';
     include './view/clients/view_add_client.php';
 

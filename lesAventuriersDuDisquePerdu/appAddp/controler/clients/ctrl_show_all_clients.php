@@ -17,7 +17,7 @@
         //refresh de la page
         echo "<script>
             setTimeout(()=>{
-                document.location.href='/addp/allClients';
+                document.location.href='?allClients';
             }, 1500);
             </script>";
     }
@@ -29,7 +29,7 @@
     //test si le tableau d'article est vide
     if(empty($liste)){
         $message = '</ul>
-        <p><a href="/addp/addClient">Veuillez ajouter un client</a></p>
+        <p><a href="?addClient">Veuillez ajouter un client</a></p>
         ';
     }
     //test sinon (tableau est rempli)
@@ -37,11 +37,11 @@
         //parcourir le tableau (version tableau associatif)
         foreach($liste as $value){
             //var_dump($value);
-            echo '<li>
+            echo '<li class="text-center mx-auto my-4">
             '.$value['society'].', Address : '.$value['street_number'].' '.$value['street'].' '.$value['city'].' '.$value['zip'].' '.$value['country'].', '.$value['mail'].
             ', '.$value['contact_name'].', '.$value['tel'].'
-            <a href="/addp/modifyClient?id='.$value['id_client'].'"><img src="./asset/img/edit.png"class="logo"></a>
-            <a href="/addp/deleteClient?id='.$value['id_client'].'"><img src="./asset/img/delete.png"class="logo"></a>
+            <a href="?modifyClient&id='.$value['id_client'].'"><img src="./asset/img/edit.png" style="height: 12px" class="img-fluid" alt="Responsive image"></a>
+            <a href="?deleteClient&id='.$value['id_client'].'"><img src="./asset/img/delete.png" style="height: 12px" class="img-fluid" alt="Responsive image"></a>
             </li>';
         }
         //var_dump($item);

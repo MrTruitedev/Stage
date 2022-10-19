@@ -1,7 +1,6 @@
 <?php
     //import
     include './utils/connect_db.php';
-    include './utils/function.php';
     include './manager/manager_client.php';
     include './view/clients/view_modify_client.php';
 
@@ -93,7 +92,7 @@
                 cn.value = '$newContactName';
                 tl.value = '$newTel';
                 setTimeout(()=>{
-                    document.location.href='/addp/allClients'; 
+                    document.location.href='?allClients'; 
                     }, 2500);
                 </script>";
             }
@@ -103,8 +102,7 @@
         }
     }
     else{
-        header('Location: /addp/test.php');
+        header('Location: ?test.php');
     }
-var_dump($_POST);
     echo $msg;
 ?>

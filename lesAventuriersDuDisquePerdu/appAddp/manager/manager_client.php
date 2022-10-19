@@ -27,7 +27,7 @@
                 $req -> bindParam(7, $mail, PDO::PARAM_STR);
                 $req -> bindParam(8, $contact, PDO::PARAM_STR);
                 $req -> bindParam(9, $tel, PDO::PARAM_INT);
-                $req ->execute();
+                $req -> execute();
             }
             catch(Exception $e){
                 die('Erreur : '.$e -> getMessage());
